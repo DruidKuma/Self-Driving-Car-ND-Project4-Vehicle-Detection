@@ -115,40 +115,9 @@ if __name__ == '__main__':
     # svc = train_classifier()
     svc = read_classifier()
 
-    # test_out_file = 'project_video_result.mp4'
-    # clip_test = VideoFileClip('project_video.mp4')
-    # clip_test_out = clip_test.fl_image(pipeline)
-    # clip_test_out.write_videofile(test_out_file, audio=False)
-
-    # draw_hog_examples(cars, notcars) 4 3 5
-    img = mpimg.imread('test_images/test3.jpg')
-    box_list = slide_multiple_windows(img, svc)
-    box_list += box_list
-    heat = np.zeros_like(img[:,:,0]).astype(np.float)
-
-    heat = add_heat(heat,box_list)
-    
-    # Apply threshold to help remove false positives
-    heat = apply_threshold(heat,1)
-
-    # Visualize the heatmap when displaying    
-    heatmap = np.clip(heat, 0, 255)
-
-    # Find final boxes from heatmap using label function
-    labels = label(heatmap)
-    draw_img, _ = draw_labeled_bboxes(np.copy(img), labels)
-
-    f, ((ax1, ax2)) = plt.subplots(1, 2, figsize=(10,10))
-    f.subplots_adjust(hspace = .4, wspace=.2)
-    ax1.imshow(heatmap, cmap='hot')
-    ax1.set_title('Heat Map', fontsize=14)
-
-    ax2.imshow(draw_img)
-    ax2.set_title('Detected Vehicle Positions', fontsize=14)
-    plt.show()
-
-
-
-
+    test_out_file = 'project_video_result.mp4'
+    clip_test = VideoFileClip('project_video.mp4')
+    clip_test_out = clip_test.fl_image(pipeline)
+    clip_test_out.write_videofile(test_out_file, audio=False)
 
 
